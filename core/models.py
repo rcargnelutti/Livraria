@@ -29,8 +29,9 @@ class Livro(models.Model):
     ISBN = models.CharField(max_length=32)
     quantidade = models.IntegerField()
     preco = models.FloatField()
-    category = models.ForeignKey(Categoria, on_delete=models.PROTECT, related_name="livros")
+    categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT, related_name="livros")
     editora = models.ForeignKey(Editora, on_delete=models.PROTECT, related_name="livros")
+    autores = models.ManyToManyField(Autor, related_name="livros")
 
     def __str__(self):
         return "%s (%s)" %(self.titulo, self.editora)
