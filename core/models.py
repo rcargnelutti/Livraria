@@ -24,6 +24,9 @@ class Autor(models.Model):
     def __str__(self):
         return self.nome
 
+    def __unicode__(self):
+       return self.nome
+
 class Livro(models.Model):
     titulo = models.CharField(max_length=255)
     ISBN = models.CharField(max_length=32)
@@ -35,3 +38,6 @@ class Livro(models.Model):
 
     def __str__(self):
         return "%s (%s)" %(self.titulo, self.editora)
+
+    def get_autores(self):
+        return "\n".join([str(a) for a in self.autores.all()])

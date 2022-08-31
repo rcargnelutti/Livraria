@@ -6,8 +6,8 @@ class CategoryAdmin(admin.ModelAdmin):
     ...
 
 @admin.register(Livro)
-class CoreAdmin(admin.ModelAdmin):
-    list_display = ['id', 'titulo', 'ISBN', 'quantidade', 'preco', 'editora', 'categoria']
+class AutorAdmin(admin.ModelAdmin):
+    list_display = ['id', 'titulo', 'ISBN', 'quantidade', 'preco', 'editora', 'categoria', 'get_autores']
     list_display_links = ['id', 'titulo', 'ISBN']
 
 
