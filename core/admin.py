@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Categoria, Editora, Autor, Livro
+from core.models import Categoria, Editora, Autor, Livro, Compra
 
 class CategoryAdmin(admin.ModelAdmin):
     ...
@@ -14,4 +14,5 @@ class AutorAdmin(admin.ModelAdmin):
 admin.site.register(Categoria)
 admin.site.register(Editora)
 admin.site.register(Autor)
+admin.site.register(Compra)
 # admin.site.register(Livro)
