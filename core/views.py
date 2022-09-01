@@ -16,6 +16,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.serializers import ModelSerializer
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -93,11 +94,18 @@ class CategoriaDetail(APIView):
         categoria.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class CategoriaListGeneric(ListCreateAPIView):
+class CategoriaListGeneric(ListCreateAPIView): # GET e POST
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
 
-class CategoriaDetailGeneric(RetrieveUpdateDestroyAPIView):
+class CategoriaDetailGeneric(RetrieveUpdateDestroyAPIView): # GET<id>, PUT, PATCH e DELETE
     lookup_field = 'id'
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
+
+# Model View Set
+
+class CategoriaViewSet(ModelViewSet):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+    #http_method_names = ['get', 'options', 'head', 'patch', 'post', 'delete']
