@@ -1,9 +1,21 @@
+import json
+from dataclasses import fields
+from pyexpat import model
+
 from django.http import HttpResponse, JsonResponse
+from django.urls import is_valid_path
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views import View
+
 from core.models import Categoria
-import json
+
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.serializers import ModelSerializer
+from rest_framework.response import Response
+
+
 
 @method_decorator(csrf_exempt, name="dispatch")
 class CategoriaView(View):
@@ -40,3 +52,22 @@ class CategoriaView(View):
         qs.delete()
         data = {'mensagem': "Item excluído com sucesso."}
         return JsonResponse(data)
+
+class CategoriaSerializer(ModelSerializer):
+    class Meta:
+        model = Categoria
+        fields = '__all__'
+
+class CategoriasList(APIView):
+    def get(self, request):
+        categorias = Categoria.objects.all()
+        serializer = CategoriaSerializer(categorias, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = CategoriaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)
