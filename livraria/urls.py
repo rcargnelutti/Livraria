@@ -15,21 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.views import View
 from rest_framework import routers
 
 from core import views
 
 router = routers.DefaultRouter()
-router.register(r'categorias-viewset', views.CategoriaViewSet)
+router.register(r'categorias', views.CategoriaViewSet)
+router.register(r'editoras', views.EditoraViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('categorias/', views.CategoriaView.as_view()),
-    path('categorias/<int:id>/', views.CategoriaView.as_view()),
+    path('categorias-class/', views.CategoriaView.as_view()),
+    path('categorias-class/<int:id>/', views.CategoriaView.as_view()),
     path('categorias-apiview/', views.CategoriasList.as_view()),
     path('categorias-apiview/<int:id>/', views.CategoriaDetail.as_view()),
     path('categorias-generic/', views.CategoriaListGeneric.as_view()),
-    path('categorias-generic/<int:id>/', views.CategoriaDetailGeneric.as_view()),
+    path('categorias-generic/<int:id>/', views.CategoriaDetailGeneric.as_view()), # noqa E501
     path('', include(router.urls)),
 ]
