@@ -1,3 +1,4 @@
+# flake8: noqa
 from .categoriaClass import CategoriaView
 from .categoriaApiView import CategoriaDetail, CategoriasList
 from .categoriaGeneric import CategoriaDetailGeneric, CategoriaListGeneric
