@@ -13,6 +13,7 @@ from core.models import Categoria
 
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.serializers import ModelSerializer
 from rest_framework.response import Response
 
@@ -91,3 +92,12 @@ class CategoriaDetail(APIView):
         categoria = get_object_or_404(Categoria.objects.all(), id=id)
         categoria.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class CategoriaListGeneric(ListCreateAPIView):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+
+class CategoriaDetailGeneric(RetrieveUpdateDestroyAPIView):
+    lookup_field = 'id'
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer

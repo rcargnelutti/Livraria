@@ -24,4 +24,6 @@ urlpatterns = [
     path('categorias/<int:id>/', views.CategoriaView.as_view()),
     path('categorias-apiview/', views.CategoriasList.as_view()),
     path('categorias-apiview/<int:id>/', views.CategoriaDetail.as_view()),
+    path('categorias-generic/', views.CategoriaListGeneric.as_view()),
+    path('categorias-generic/<int:id>/', views.CategoriaDetailGeneric.as_view()),
 ]
