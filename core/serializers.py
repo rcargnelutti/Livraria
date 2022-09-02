@@ -69,7 +69,7 @@ class CompraSerializer(ModelSerializer):
 
     class Meta:
         model = Compra
-        fields = '__all__'
+        fields = ("id", "status", "usuario", "itens", "total")
 
     def get_status(self, instance):
         return instance.get_status_display()
